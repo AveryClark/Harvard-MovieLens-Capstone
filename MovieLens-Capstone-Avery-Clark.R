@@ -211,7 +211,7 @@ edx <- rbind(edx, removed)
 
 # This will clean up memory by deleting things we no longer need.
 
-rm(dl, ratings, movies, test_index, temp, movielens, removed)
+rm(dl, ratings, movies, test_index, temp, removed)
 
 
 
