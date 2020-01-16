@@ -263,7 +263,7 @@ edx %>%
 edx %>% 
   dplyr::count(movieId) %>% 
   ggplot(aes(n)) + 
-  geom_histogram(bins = 30, color = "black") + 
+  geom_histogram(bins = 30, color = "green", fill = "blue") + 
   scale_x_log10() + 
   ggtitle("Movies")
 # From the graph we can see that the most common number of ratings received for movies in this 
@@ -275,7 +275,7 @@ edx %>%
 edx %>%
   dplyr::count(userId) %>% 
   ggplot(aes(n)) + 
-  geom_histogram(bins = 30, color = "black") + 
+  geom_histogram(bins = 30, color = "green", fill = "blue") + 
   scale_x_log10() +
   ggtitle("Users")
 # From the graph we can see that the most common number of ratings given by users is around 
@@ -475,7 +475,7 @@ movie_avgs <- edx %>%
 
 # This plot shows us these "movie biases" per movie. Zero represents the dataset average 
 # on this plot. Notice some movies score far below or above the dataset average of 3.512.
-movie_avgs %>% qplot(b_i, geom ="histogram", bins = 10, data = ., color = I("black"))
+movie_avgs %>% qplot(b_i, geom ="histogram", bins = 10, data = ., color = I("green"), fill = I("blue"))
 
 # Let's see how much the predictions improve with this movie-based model.
 predicted_ratings <- mu + validation %>% 
@@ -499,7 +499,7 @@ edx %>%
   summarize(b_u = mean(rating)) %>% 
   filter(n()>=100) %>%
   ggplot(aes(b_u)) + 
-  geom_histogram(bins = 30, color = "black")
+  geom_histogram(bins = 30, color = "green", fill = "blue")
 
 # Let's try to improve our accuracy by creating a model based on user bias
 # (users' previous ratings).
@@ -590,7 +590,7 @@ rmses <- sapply(lambdas, function(l){
   return(RMSE(predicted_ratings, validation$rating))
 })
 
-qplot(lambdas, rmses)  
+qplot(lambdas, rmses, color = I("blue"))
 
 lambda <- lambdas[which.min(rmses)]
 lambda
@@ -641,7 +641,7 @@ rmses <- sapply(lambdas, function(l){
   return(RMSE(predicted_ratings, validation$rating))
 })
 
-qplot(lambdas, rmses)  
+qplot(lambdas, rmses, color = I("blue"))
 
 lambda_g <- lambdas[which.min(rmses)]
 lambda_g
